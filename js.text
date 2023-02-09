@@ -1,0 +1,65 @@
+function playRound(playerSelection, computerSelection) {
+    // your code here!
+    if(computerSelection.toLowerCase()===playerSelection.toLowerCase()){
+        return "draw";
+    }
+    if(computerSelection.toLowerCase()==="rock"){
+        if(playerSelection.toLowerCase()==="paper"){
+            return "You Win! Paper beats Rock";
+        }
+        if(playerSelection.toLowerCase()==="scissors"){
+            return "You Lose! Rock beats Scissors";
+        }
+    }
+    if(computerSelection.toLowerCase()==="paper"){
+        if(playerSelection.toLowerCase()==="rock"){
+            return "You Lose! Paper beats Rock";
+        }
+        if(playerSelection.toLowerCase()==="scissors"){
+            return "You Win! Scissors beats paper";
+        }
+    }
+    if(computerSelection.toLowerCase()==="scissors"){
+        if(playerSelection.toLowerCase()==="rock"){
+            return "You Win! Rock beats Scissors";
+        }
+        if(playerSelection.toLowerCase()==="paper"){
+            return "You Lose! Scissors beats paper";
+        }
+    }
+}
+function getComputerChoice(){
+    const choice=["Rock","Paper","Scissors"];
+    return choice[Math.floor(Math.random()*choice.length)];
+}
+const zz=new Array(5);
+let count1=0,count2=0;
+let ul=document.querySelector('ul');
+for(let i=0;i<5;i++){
+    let playerSelection=prompt("enter rock or paper or scissors");
+    if(!(playerSelection.toLowerCase()==="scissors" || playerSelection.toLowerCase()==="rock" || playerSelection.toLowerCase()==="paper")){
+        prompt("please enter rock or paper or scissors");
+    }
+    let computerSelection = getComputerChoice();
+    zz[i]=playRound(playerSelection, computerSelection);
+}
+zz.forEach((txt)=>{
+    let li=document.createElement('li');
+    let ln=document.createTextNode(txt);
+    li.appendChild(ln);
+    ul.appendChild(li);
+    if(txt.search("Win")!=-1){
+        count1++;
+    }
+    else if(txt.search("draw")==-1){
+        count2++;
+    }
+})
+let h1=document.querySelector('#owl');
+if(count1>count2){
+    h1.innerHTML="You Win!";
+}
+else{
+    h1.innerHTML="You Lose!";
+}
+
